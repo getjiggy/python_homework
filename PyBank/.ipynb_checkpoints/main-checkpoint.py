@@ -26,7 +26,6 @@ for index, row in df.iterrows():
         elif min_change > df['Profit/Losses'][index + 1] - df['Profit/Losses'][index]:
             min_change = df['Profit/Losses'][index + 1] - df['Profit/Losses'][index]
             min_row = df['Date'][index + 1]
-            print(f"index: {index}, row: {row}, change: {df['Profit/Losses'][index + 1] - df['Profit/Losses'][index]}")
     except:
         continue
 avg_change /= total_number_months - 1
