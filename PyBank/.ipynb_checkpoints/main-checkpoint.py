@@ -35,6 +35,7 @@ for i in df.index:
             min_row = df['Date'][i + 1]
     else:
         break
+        
 # finalizing avg_change        
 avg_change /= total_number_months - 1
 
