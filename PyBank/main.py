@@ -15,22 +15,21 @@ max_row = df['Date'][1]
 min_row = df['Date'][1]
 min_change = 0
 
-for index, row in df.iterrows():
-    
-    if index != total_number_months - 1:
-        avg_change += df['Profit/Losses'][index + 1] - df['Profit/Losses'][index]
+for i in df.index:
+    if i != total_number_months - 1:
+        avg_change += df['Profit/Losses'][i + 1] - df['Profit/Losses'][i]
         if max_change == 0:
-            max_change = df['Profit/Losses'][index + 1] - df['Profit/Losses'][index]
-            max_row = df['Date'][index + 1]
-        elif max_change < df['Profit/Losses'][index + 1] - df['Profit/Losses'][index]:
-            max_change = df['Profit/Losses'][index + 1] - df['Profit/Losses'][index]
-            max_row = df['Date'][index + 1]
+            max_change = df['Profit/Losses'][i + 1] - df['Profit/Losses'][i]
+            max_row = df['Date'][i + 1]
+        elif max_change < df['Profit/Losses'][i + 1] - df['Profit/Losses'][i]:
+            max_change = df['Profit/Losses'][i + 1] - df['Profit/Losses'][i]
+            max_row = df['Date'][i + 1]
         if min_change == 0:
-            min_change = df['Profit/Losses'][index + 1] - df['Profit/Losses'][index]
-            min_row = df['Date'][index + 1]
-        elif min_change > df['Profit/Losses'][index + 1] - df['Profit/Losses'][index]:
-            min_change = df['Profit/Losses'][index + 1] - df['Profit/Losses'][index]
-            min_row = df['Date'][index + 1]
+            min_change = df['Profit/Losses'][i + 1] - df['Profit/Losses'][i]
+            min_row = df['Date'][i + 1]
+        elif min_change > df['Profit/Losses'][i + 1] - df['Profit/Losses'][i]:
+            min_change = df['Profit/Losses'][i + 1] - df['Profit/Losses'][i]
+            min_row = df['Date'][i + 1]
     else:
         break
 avg_change /= total_number_months - 1
