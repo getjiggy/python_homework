@@ -14,8 +14,8 @@ max_change = 0
 min_change = 0
 
 # setting max_row and min_row to first record for iteration
-max_row = df['Date'][1]
-min_row = df['Date'][1]
+max_row = df['Date'][0]
+min_row = df['Date'][0]
 
 # iterating over df to calculate avg_change, max_change, min_change, max_row, min_row
 for i in df.index:
