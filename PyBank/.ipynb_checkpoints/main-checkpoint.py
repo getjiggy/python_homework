@@ -1,41 +1,46 @@
-import pandas as pd
+import csv
 
-df = pd.read_csv("C:\\Users\\mattr\\Class\\python_homework\\PyBank\\budget_data.csv")
+# set empty record list
+record_list = []
 
-# getting total number of months
-total_number_months = df['Date'].count()
-
-# summing profits/losses
-net_profit = df['Profit/Losses'].sum()
+# opening budget_data.csv and appending each line to record_list
+with open('budget_data.csv') as data:
+    csv_reader = csv.reader(data)
+    next(csv_reader)
+    for line in csv_reader:
+        record_list.append(line)
 
 # setting variables for iteration
 avg_change = 0
 max_change = 0
 min_change = 0
+net_profit = 0
+min_row = ''
+max_row = ''        
+total_number_months = len(record_list)
 
-# setting max_row and min_row to first record for iteration
-max_row = df['Date'][0]
-min_row = df['Date'][0]
-
-# iterating over df to calculate avg_change, max_change, min_change, max_row, min_row
-for i in df.index:
+# iterating over record_list
+for i in range(len(record_list)):
     if i != total_number_months - 1:
-        avg_change += df['Profit/Losses'][i + 1] - df['Profit/Losses'][i]
+        current_change = int(record_list[i + 1][1]) - int(record_list[i][1])
+        current_row = record_list[i][0]
+        net_profit += current_change
+        avg_change += current_change        
         if max_change == 0:
-            max_change = df['Profit/Losses'][i + 1] - df['Profit/Losses'][i]
-            max_row = df['Date'][i + 1]
-        elif max_change < df['Profit/Losses'][i + 1] - df['Profit/Losses'][i]:
-            max_change = df['Profit/Losses'][i + 1] - df['Profit/Losses'][i]
-            max_row = df['Date'][i + 1]
+            max_change = current_change
+            max_row = current_row
+        elif max_change < current_change:
+            max_change = current_change
+            max_row = current_row
         if min_change == 0:
-            min_change = df['Profit/Losses'][i + 1] - df['Profit/Losses'][i]
-            min_row = df['Date'][i + 1]
-        elif min_change > df['Profit/Losses'][i + 1] - df['Profit/Losses'][i]:
-            min_change = df['Profit/Losses'][i + 1] - df['Profit/Losses'][i]
-            min_row = df['Date'][i + 1]
+            min_change = current_change
+            min_row = current_row
+        elif min_change > current_change:
+            min_change = current_change
+            min_row = current_row
     else:
         break
-        
+            
 # finalizing avg_change        
 avg_change /= total_number_months - 1
 
