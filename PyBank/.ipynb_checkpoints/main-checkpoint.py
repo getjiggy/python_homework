@@ -19,12 +19,12 @@ min_row = ''
 max_row = ''        
 total_number_months = len(record_list)
 
-# iterating over record_list
+# iterating over record_list and performing calculations
 for i in range(len(record_list)):
+    net_profit += int(record_list[i][1])
     if i != total_number_months - 1:
         current_change = int(record_list[i + 1][1]) - int(record_list[i][1])
         current_row = record_list[i][0]
-        net_profit += current_change
         avg_change += current_change        
         if max_change == 0:
             max_change = current_change
