@@ -1,10 +1,11 @@
 import csv
+from pathlib import Path
 
 # set empty record list
 record_list = []
-
+path = Path('PyBank/budget_data.csv')
 # opening budget_data.csv and appending each line to record_list
-with open('budget_data.csv') as data:
+with open(path) as data:
     csv_reader = csv.reader(data)
     next(csv_reader)
     for line in csv_reader:
